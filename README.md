@@ -1,12 +1,12 @@
 # Dawn Fall Rain
-### *A game by Jorge Zapata — Norungo Project*
+### *A game by Zyumane Zye — Norungo Project*
 
 ---
 
 ## 🇲🇽 Español
 
 ### Descripción
-**Dawn Fall Rain** es un juego de horror psicológico, sigilo y supervivencia en tercera persona desarrollado en Unity como proyecto de graduación de la carrera de Ingeniería en Animación Digital.
+**Dawn Fall Rain** es un juego de horror psicológico, sigilo y supervivencia en tercera persona desarrollado en Unity como proyecto de graduación de la carrera de Ingeniería en Programación y Diseño de Videojuegos.
 
 El jugador controla a **Rom Origo**, un hombre desempleado que queda atrapado en **Orevono**, una ciudad industrial abandonada rodeada por un domo de oscuridad permanente. Sin combate, sin armas — solo ingenio, sigilo y la capacidad de leer el entorno para sobrevivir.
 
@@ -63,7 +63,7 @@ Assets/
 ## 🇺🇸 English
 
 ### Description
-**Dawn Fall Rain** is a third-person psychological horror, stealth and survival game developed in Unity as a graduation project for a Digital Animation Engineering degree.
+**Dawn Fall Rain** is a third-person psychological horror, stealth and survival game developed in Unity as a graduation project for a Video Game Programming and Design Engineering degree.
 
 The player controls **Rom Origo**, an unemployed man trapped in **Orevono**, an abandoned industrial city surrounded by a permanent dome of darkness. No combat, no weapons — only wit, stealth, and the ability to read the environment to survive.
 
@@ -117,4 +117,4 @@ Assets/
 
 ---
 
-*Dawn Fall Rain © 2025 Jorge Zapata. Graduation project — Digital Animation Engineering.*
+*Dawn Fall Rain © 2025 Zyumane Zye. Graduation project — Video Game Programming and Design Engineering.*
