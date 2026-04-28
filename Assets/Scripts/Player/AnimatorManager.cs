@@ -10,10 +10,10 @@ public class AnimatorManager : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         if (animator == null)
-            Debug.LogError("AnimatorManager: no se encontró Animator en " + gameObject.name);
+            Debug.LogError("AnimatorManager: no se encontro Animator en " + gameObject.name);
     }
 
-    public void HandleAnimatorValues(float horizontalMovement, float verticalMovement)
+    public void HandleAnimatorValues(float horizontalMovement, float verticalMovement, bool isRunning)
     {
         if (horizontalMovement > 0)
         {
@@ -41,7 +41,14 @@ public class AnimatorManager : MonoBehaviour
             snappedVertical = 0;
         }
 
+        if (isRunning && snappedVertical > 0) //We dont want to be able to run backwards or run whilst moving backwards
+        {
+            snappedVertical = 2;
+        }
+
         animator.SetFloat("Horizontal", snappedHorizontal, 0.1f, Time.deltaTime);
         animator.SetFloat("Vertical", snappedVertical, 0.1f, Time.deltaTime);
     }
+
+
 }
