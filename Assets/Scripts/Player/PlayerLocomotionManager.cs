@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerLocomotionManager : MonoBehaviour
 {
     protected InputManager inputManager;
-    protected Rigidbody playerRigidbody;
+    protected PlayerManager playerManager;
+    
+    public  Rigidbody playerRigidbody;
 
     [Header("Camera Transform")]
     public Transform playerCamera;
@@ -14,6 +16,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
     public float rotationSpeed = 3.5f;
+    public float quickTurnSpeed = 8;
 
     [Header("Rotation Variables")]
     protected Quaternion targetRotation;
@@ -26,6 +29,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     {
         inputManager = GetComponent<InputManager>();
         playerRigidbody = GetComponent<Rigidbody>();
+        playerManager = GetComponent<PlayerManager>();
     }
 
     public void HandleAllLocomotion()
@@ -50,6 +54,13 @@ public class PlayerLocomotionManager : MonoBehaviour
         Quaternion tr = Quaternion.LookRotation(targetDir);
         playerRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.fixedDeltaTime);
         playerRigidbody.MoveRotation(playerRotation);
+
+        if (playerManager.isPerformingQuickTurn)
+        {
+            targetRotation = transform.rotation * Quaternion.Euler(0, 180f, 0);
+            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.fixedDeltaTime);
+            playerRigidbody.MoveRotation(playerRotation);
+        }
     }
 
     private void HandleMovement()

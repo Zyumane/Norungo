@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCamera : MonoBehaviour
 {
     public InputManager inputManager; 
+    public PlayerManager playerManager;
 
     public Transform cameraPivot;
     public Camera cameraObject;
@@ -14,6 +15,7 @@ public class PlayerCamera : MonoBehaviour
     protected Vector3 targetPosition;
     protected Vector3 cameraRotation;
     protected Quaternion targetRotation;
+    protected bool quickTurnApplied = false;
 
     [Header("Camera speed")]
     public float cameraSmoothTime = 0.2f;
@@ -22,12 +24,6 @@ public class PlayerCamera : MonoBehaviour
     protected float lookAmountVertical;
     protected float maximumPivotAngle = 15;
     protected float minimumPivotAngle = -15;
-
-
-    //private void Awake()
-    //{
-    //    player.GetComponent<InputManager>();
-    //}
 
     public void HandleAllCameraMovement()
     {
@@ -60,4 +56,39 @@ public class PlayerCamera : MonoBehaviour
         targetRotation = Quaternion.Slerp(cameraPivot.localRotation, targetRotation, cameraSmoothTime);
         cameraPivot.localRotation = targetRotation;
     }
+
+    public void ApplyQuickTurnCamera()
+    {
+        lookAmountVertical += 180f;
+        //Debug.Log("ApplyQuickTurnCamera llamado. lookAmountVertical antes: " + lookAmountVertical);
+        //lookAmountVertical += 180f;
+        //cameraRotation = Vector3.zero;
+        //cameraRotation.y = lookAmountVertical;
+        //transform.rotation = Quaternion.Euler(cameraRotation);
+    }
 }
+
+/*  Scrap code
+ *  
+ *  //If a perfroming a Quick Turn, snap the camera to a 180 position
+        //if(inputManager.quickTurnInput)
+        //{
+        //    inputManager.quickTurnInput = false;
+        //    lookAmountVertical = lookAmountVertical + 180;
+        //    cameraRotation.y = cameraRotation.y + 180;
+        //    transform.rotation = targetRotation;
+        //    //in future, add smooth transition.
+        //}
+
+        //if (playerManager.isPerformingQuickTurn && !quickTurnApplied)
+        //{
+        //    quickTurnApplied = true;
+        //    lookAmountVertical -= 180f;
+        //}
+        //else if (!playerManager.isPerformingQuickTurn)
+        //{
+        //    quickTurnApplied = false;
+        //}
+ 
+ 
+ */

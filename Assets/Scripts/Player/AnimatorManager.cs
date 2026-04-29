@@ -3,6 +3,9 @@ using UnityEngine;
 public class AnimatorManager : MonoBehaviour
 {
     Animator animator;
+    PlayerLocomotionManager playerLocomotionManager;
+
+
     float snappedVertical;
     float snappedHorizontal;
 
@@ -11,6 +14,15 @@ public class AnimatorManager : MonoBehaviour
         animator = GetComponent<Animator>();
         if (animator == null)
             Debug.LogError("AnimatorManager: no se encontro Animator en " + gameObject.name);
+        playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+
+    }
+
+    public void PlayAnimationWithoutRootMotion(string targetAnimation, bool isPerformingAction)
+    {
+        animator.SetBool("isPerformingAction", isPerformingAction);
+        animator.applyRootMotion = false;
+        animator.CrossFade(targetAnimation, 0.2f, 1);
     }
 
     public void HandleAnimatorValues(float horizontalMovement, float verticalMovement, bool isRunning)
@@ -50,5 +62,14 @@ public class AnimatorManager : MonoBehaviour
         animator.SetFloat("Vertical", snappedVertical, 0.1f, Time.deltaTime);
     }
 
-
+    //private void OnAnimatorMove()
+    //{
+    //    Vector3 animatorDeltaPosition = animator.deltaPosition;
+    //    animatorDeltaPosition.y = 0;
+    //
+    //    Vector3 velocity = animatorDeltaPosition / Time.deltaTime;
+    //    playerLocomotionManager.playerRigidbody.drag = 0;
+    //    playerLocomotionManager.playerRigidbody.velocity = velocity;
+    //    transform.rotation *= animator.deltaRotation;
+    //}
 }

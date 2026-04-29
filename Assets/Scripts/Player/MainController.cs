@@ -53,6 +53,15 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quick Turn"",
+                    ""type"": ""Button"",
+                    ""id"": ""291e914a-f277-48e2-983e-80aeb459ba21"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -253,6 +262,28 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8594ca7-342e-46fa-ad98-d69a0bf2bbb1"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quick Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""569b50b9-5d8f-4f3b-b37c-3b11be8d3839"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quick Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -264,6 +295,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         m_Movement_Movement = m_Movement.FindAction("Movement", throwIfNotFound: true);
         m_Movement_Camera = m_Movement.FindAction("Camera", throwIfNotFound: true);
         m_Movement_Run = m_Movement.FindAction("Run", throwIfNotFound: true);
+        m_Movement_QuickTurn = m_Movement.FindAction("Quick Turn", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -328,6 +360,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Movement;
     private readonly InputAction m_Movement_Camera;
     private readonly InputAction m_Movement_Run;
+    private readonly InputAction m_Movement_QuickTurn;
     public struct MovementActions
     {
         private @MainController m_Wrapper;
@@ -335,6 +368,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Movement_Movement;
         public InputAction @Camera => m_Wrapper.m_Movement_Camera;
         public InputAction @Run => m_Wrapper.m_Movement_Run;
+        public InputAction @QuickTurn => m_Wrapper.m_Movement_QuickTurn;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -353,6 +387,9 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @QuickTurn.started += instance.OnQuickTurn;
+            @QuickTurn.performed += instance.OnQuickTurn;
+            @QuickTurn.canceled += instance.OnQuickTurn;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -366,6 +403,9 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @QuickTurn.started -= instance.OnQuickTurn;
+            @QuickTurn.performed -= instance.OnQuickTurn;
+            @QuickTurn.canceled -= instance.OnQuickTurn;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -388,5 +428,6 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnQuickTurn(InputAction.CallbackContext context);
     }
 }

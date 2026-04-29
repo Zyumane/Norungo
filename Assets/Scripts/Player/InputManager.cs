@@ -6,6 +6,9 @@ public class InputManager : MonoBehaviour
 {
     MainController playerControls;
     AnimatorManager animatorManager;
+    Animator animator;
+    PlayerManager playerManager;
+    PlayerCamera playerCamera;
 
     [Header("Player Movement")]
     public float verticalMovementInput; 
@@ -19,12 +22,15 @@ public class InputManager : MonoBehaviour
 
     [Header("Button Inputs")]
     public bool runInput;
+    public bool quickTurnInput;
 
 
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>(); 
-
+        animator = GetComponent<Animator>();
+        playerManager = GetComponent<PlayerManager>();
+        playerCamera = FindObjectOfType<PlayerCamera>();
     }
 
     private void OnEnable()
@@ -38,6 +44,8 @@ public class InputManager : MonoBehaviour
             playerControls.Movement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
             playerControls.Movement.Run.performed += i => runInput = true;
             playerControls.Movement.Run.canceled += i => runInput = false;
+            playerControls.Movement.QuickTurn.performed += i => quickTurnInput = true;
+            //playerControls.Movement.QuickTurn.canceled += i => quickTurnInput = false;
         }
 
         playerControls.Enable();
@@ -52,6 +60,7 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleCameraInput();
+        HandleQuickTurnInput();
     }
 
     private void HandleMovementInput()
@@ -66,6 +75,24 @@ public class InputManager : MonoBehaviour
         horizontalCameraInput = cameraInput.x;
         verticalCameraInput = cameraInput.y;
 
+    }
+
+
+    private void HandleQuickTurnInput()
+    {
+        if(playerManager.isPerfomingAction)
+        {
+            return;
+        }
+
+        if(quickTurnInput)
+        {
+            //Play an aimation that turns the player
+            quickTurnInput = false;
+            animator.SetBool("isPerformingQuickTurn", true);
+            animatorManager.PlayAnimationWithoutRootMotion("Run_Hardturn_180", true);
+            playerCamera.ApplyQuickTurnCamera();
+        }
     }
 
 
