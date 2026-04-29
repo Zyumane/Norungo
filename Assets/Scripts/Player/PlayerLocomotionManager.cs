@@ -7,7 +7,7 @@ public class PlayerLocomotionManager : MonoBehaviour
     protected InputManager inputManager;
     protected PlayerManager playerManager;
     
-    public  Rigidbody playerRigidbody;
+    public Rigidbody playerRigidbody;
 
     [Header("Camera Transform")]
     public Transform playerCamera;
@@ -55,11 +55,14 @@ public class PlayerLocomotionManager : MonoBehaviour
         playerRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.fixedDeltaTime);
         playerRigidbody.MoveRotation(playerRotation);
 
-        if (playerManager.isPerformingQuickTurn)
+        //video manual insert code
+        if(inputManager.verticalMovementInput != 0 || inputManager.horizontalMovementInput != 0)
+            transform.rotation = playerRotation;
+
+        if (playerManager.isPerformingQuickTurn) //Rollback
         {
+            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.deltaTime);
             targetRotation = transform.rotation * Quaternion.Euler(0, 180f, 0);
-            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.fixedDeltaTime);
-            playerRigidbody.MoveRotation(playerRotation);
         }
     }
 

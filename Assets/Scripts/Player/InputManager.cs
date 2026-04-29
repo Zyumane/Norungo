@@ -8,7 +8,6 @@ public class InputManager : MonoBehaviour
     AnimatorManager animatorManager;
     Animator animator;
     PlayerManager playerManager;
-    PlayerCamera playerCamera;
 
     [Header("Player Movement")]
     public float verticalMovementInput; 
@@ -30,7 +29,6 @@ public class InputManager : MonoBehaviour
         animatorManager = GetComponent<AnimatorManager>(); 
         animator = GetComponent<Animator>();
         playerManager = GetComponent<PlayerManager>();
-        playerCamera = FindObjectOfType<PlayerCamera>();
     }
 
     private void OnEnable()
@@ -77,7 +75,6 @@ public class InputManager : MonoBehaviour
 
     }
 
-
     private void HandleQuickTurnInput()
     {
         if(playerManager.isPerfomingAction)
@@ -85,13 +82,11 @@ public class InputManager : MonoBehaviour
             return;
         }
 
-        if(quickTurnInput)
+        if(quickTurnInput) //Rollback
         {
             //Play an aimation that turns the player
-            quickTurnInput = false;
             animator.SetBool("isPerformingQuickTurn", true);
             animatorManager.PlayAnimationWithoutRootMotion("Run_Hardturn_180", true);
-            playerCamera.ApplyQuickTurnCamera();
         }
     }
 

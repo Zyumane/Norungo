@@ -5,7 +5,6 @@ public class AnimatorManager : MonoBehaviour
     Animator animator;
     PlayerLocomotionManager playerLocomotionManager;
 
-
     float snappedVertical;
     float snappedHorizontal;
 
@@ -62,14 +61,14 @@ public class AnimatorManager : MonoBehaviour
         animator.SetFloat("Vertical", snappedVertical, 0.1f, Time.deltaTime);
     }
 
-    //private void OnAnimatorMove()
-    //{
-    //    Vector3 animatorDeltaPosition = animator.deltaPosition;
-    //    animatorDeltaPosition.y = 0;
-    //
-    //    Vector3 velocity = animatorDeltaPosition / Time.deltaTime;
-    //    playerLocomotionManager.playerRigidbody.drag = 0;
-    //    playerLocomotionManager.playerRigidbody.velocity = velocity;
-    //    transform.rotation *= animator.deltaRotation;
-    //}
+    private void OnAnimatorMove() //Rollback
+    { 
+        Vector3 animatorDeltaPosition = animator.deltaPosition;
+        animatorDeltaPosition.y = 0;
+    
+        Vector3 velocity = animatorDeltaPosition / Time.deltaTime;
+        playerLocomotionManager.playerRigidbody.drag = 0;
+        playerLocomotionManager.playerRigidbody.velocity = velocity;
+        transform.rotation *= animator.deltaRotation;
+    }
 }
