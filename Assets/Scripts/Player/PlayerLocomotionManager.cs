@@ -4,6 +4,7 @@ public class PlayerLocomotionManager : MonoBehaviour
 {
     private InputManager inputManager;
     private PlayerManager playerManager;
+    private Transform cameraTransform;
 
     public Rigidbody playerRigidbody;
 
@@ -28,21 +29,22 @@ public class PlayerLocomotionManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerManager = GetComponent<PlayerManager>();
+        cameraTransform = Camera.main.transform;
     }
 
-    public void HandleAllLocomotion()
-    {
-        HandleRotation();
-        HandleMovement();
-    }
+    //public void HandleAllLocomotion()
+    //{
+    //    HandleRotation();
+    //    HandleMovement();
+    //}
 
     public void HandleRotationPublic() => HandleRotation();
     public void HandleMovementPublic() => HandleMovement();
 
     private void HandleRotation()
     {
-        Vector3 targetDir = Camera.main.transform.forward * inputManager.verticalMovementInput;
-        targetDir += Camera.main.transform.right * inputManager.horizontalMovementInput;
+        Vector3 targetDir = cameraTransform.forward * inputManager.verticalMovementInput;
+        targetDir += cameraTransform.right * inputManager.horizontalMovementInput;
         targetDir.Normalize();
         targetDir.y = 0;
 
@@ -66,8 +68,8 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     private void HandleMovement()
     {
-        moveDirection = Camera.main.transform.forward * inputManager.verticalMovementInput;
-        moveDirection += Camera.main.transform.right * inputManager.horizontalMovementInput;
+        moveDirection = cameraTransform.forward * inputManager.verticalMovementInput;
+        moveDirection += cameraTransform.right * inputManager.horizontalMovementInput;
         moveDirection.Normalize();
         moveDirection.y = 0;
 
