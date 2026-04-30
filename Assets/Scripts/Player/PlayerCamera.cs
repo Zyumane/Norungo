@@ -11,18 +11,33 @@ public class PlayerCamera : MonoBehaviour
     public Camera cameraObject;
     public GameObject player;
 
-    protected Vector3 cameraFollowVelocity = Vector3.zero;
-    protected Vector3 targetPosition;
-    protected Vector3 cameraRotation;
-    protected Quaternion targetRotation;
+    private Vector3 cameraFollowVelocity = Vector3.zero;
+    private Vector3 targetPosition;
+    private Vector3 cameraRotation;
+    private Quaternion targetRotation;
 
     [Header("Camera speed")]
-    public float cameraSmoothTime = 0.2f;
+    public float cameraFollowSmoothTime = 0.2f;
+    public float cameraRotationSmoothTime = 0.2f;
 
-    protected float lookAmountHorizontal;
-    protected float lookAmountVertical;
-    protected float maximumPivotAngle = 15;
-    protected float minimumPivotAngle = -15;
+    private float lookAmountHorizontal;
+    private float lookAmountVertical;
+    private float maximumPivotAngle = 15;
+    private float minimumPivotAngle = -15;
+
+    private void Awake()
+    {
+        if (inputManager == null)
+            Debug.LogError("PlayerCamera: falta asignar InputManager en el Inspector.");
+        if (playerManager == null)
+            Debug.LogError("PlayerCamera: falta asignar PlayerManager en el Inspector.");
+        if (cameraPivot == null)
+            Debug.LogError("PlayerCamera: falta asignar CameraPivot en el Inspector.");
+        if (cameraObject == null)
+            Debug.LogError("PlayerCamera: falta asignar CameraObject en el Inspector.");
+        if (player == null)
+            Debug.LogError("PlayerCamera: falta asignar Player en el Inspector.");
+    }
 
     public void HandleAllCameraMovement()
     {
@@ -33,7 +48,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void FollowPlayer()
     {
-        targetPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraFollowVelocity, cameraSmoothTime);
+        targetPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraFollowVelocity, cameraFollowSmoothTime);
         transform.position = targetPosition;
     }
 
@@ -46,7 +61,7 @@ public class PlayerCamera : MonoBehaviour
         cameraRotation = Vector3.zero;
         cameraRotation.y = lookAmountVertical;
         targetRotation = Quaternion.Euler(cameraRotation);
-        targetRotation = Quaternion.Slerp(transform.rotation, targetRotation, cameraSmoothTime);
+        targetRotation = Quaternion.Slerp(transform.rotation, targetRotation, cameraRotationSmoothTime);
         transform.rotation = targetRotation;
 
         //If a perfroming a Quick Turn, snap the camera to a 180 position //rollback
@@ -62,7 +77,7 @@ public class PlayerCamera : MonoBehaviour
         cameraRotation = Vector3.zero;
         cameraRotation.x = lookAmountHorizontal;
         targetRotation = Quaternion.Euler(cameraRotation);
-        targetRotation = Quaternion.Slerp(cameraPivot.localRotation, targetRotation, cameraSmoothTime);
+        targetRotation = Quaternion.Slerp(cameraPivot.localRotation, targetRotation, cameraRotationSmoothTime);
         cameraPivot.localRotation = targetRotation;
     }
 

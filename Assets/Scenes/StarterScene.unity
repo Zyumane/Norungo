@@ -3045,6 +3045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a3478e4f240ec8448d3b34b4369871c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1666013754}
   isPerfomingAction: 0
   isPerformingQuickTurn: 0
 --- !u!114 &7701597264670225612

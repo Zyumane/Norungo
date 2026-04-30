@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLocomotionManager : MonoBehaviour
 {
-    protected InputManager inputManager;
-    protected PlayerManager playerManager;
-    
+    private InputManager inputManager;
+    private PlayerManager playerManager;
+
     public Rigidbody playerRigidbody;
 
     [Header("Camera Transform")]
@@ -19,11 +17,11 @@ public class PlayerLocomotionManager : MonoBehaviour
     public float quickTurnSpeed = 8;
 
     [Header("Rotation Variables")]
-    protected Quaternion targetRotation;
-    protected Quaternion playerRotation;
+    private Quaternion targetRotation;
+    private Quaternion playerRotation;
 
     [Header("Movement Variables")]
-    protected Vector3 moveDirection;
+    private Vector3 moveDirection;
 
     private void Awake()
     {
@@ -56,7 +54,7 @@ public class PlayerLocomotionManager : MonoBehaviour
         playerRigidbody.MoveRotation(playerRotation);
 
         //video manual insert code
-        if(inputManager.verticalMovementInput != 0 || inputManager.horizontalMovementInput != 0)
+        if (inputManager.verticalMovementInput != 0 || inputManager.horizontalMovementInput != 0)
             transform.rotation = playerRotation;
 
         if (playerManager.isPerformingQuickTurn) //Rollback
