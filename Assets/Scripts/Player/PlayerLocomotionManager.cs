@@ -61,8 +61,8 @@ public class PlayerLocomotionManager : MonoBehaviour
 
         if (playerManager.isPerformingQuickTurn) //Rollback
         {
-            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.deltaTime);
             targetRotation = transform.rotation * Quaternion.Euler(0, 180f, 0);
+            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.deltaTime);
         }
     }
 
