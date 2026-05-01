@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31466f660597743cab0c563dda1a8fed, type: 3}
-  m_Name: ShaderGraph
+  m_Script: {fileID: 11500000, guid: ede301f96dad33a449246c290158dd0e, type: 3}
+  m_Name: Test Key
   m_EditorClassIdentifier: 
-  assetPackDisplayName: Synty Polygon
-  packageIds:
-  - com.unity.shadergraph
-  hasPromptedUser: 0
+  itemName: 
+  itemPrefabModel: {fileID: 0}
+  itemID: 

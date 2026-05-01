@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public PlayerCamera playerCamera;
-    
+    public PlayerInventoryManager playerInventoryManager;
     public InputManager inputManager;
+
     Animator animator;
     PlayerLocomotionManager playerLocomotionManager;
 
@@ -18,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         //playerCamera = FindObjectOfType<PlayerCamera>();
+        playerInventoryManager = GetComponent<PlayerInventoryManager>();
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();

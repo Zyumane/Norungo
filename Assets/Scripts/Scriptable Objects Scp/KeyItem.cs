@@ -7,4 +7,6 @@ public class KeyItem : Item
 {
     // Llave universal — abre cualquier nodo amarillo.
     // Sin propiedades adicionales por ahora.
+
+
 }

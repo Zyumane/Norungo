@@ -11,7 +11,7 @@ public class InteractibleObject : MonoBehaviour
 
     [SerializeField] protected GameObject interactibleCanvas; //La imagen que indica al jugador que puede interactuar con el objeto
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         //Opcional: revisa la capa o layer especifica de la colision
 
@@ -27,7 +27,7 @@ public class InteractibleObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         if(player != null)
         {
@@ -39,7 +39,7 @@ public class InteractibleObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (player == null)
         {
