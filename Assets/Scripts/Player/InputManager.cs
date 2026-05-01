@@ -22,6 +22,7 @@ public class InputManager : MonoBehaviour
     [Header("Button Inputs")]
     public bool runInput;
     public bool quickTurnInput;
+    public bool interactInput;
 
 
     private void Awake()
@@ -44,6 +45,7 @@ public class InputManager : MonoBehaviour
             playerControls.Movement.Run.canceled += i => runInput = false;
             playerControls.Movement.QuickTurn.performed += i => quickTurnInput = true;
             //playerControls.Movement.QuickTurn.canceled += i => quickTurnInput = false;
+            playerControls.Player_Actions.Interact.performed += i => interactInput = true;
         }
 
         playerControls.Enable();
@@ -59,6 +61,7 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleCameraInput();
         HandleQuickTurnInput();
+        HandleInteractionInput();
     }
 
     private void HandleMovementInput()
@@ -90,7 +93,16 @@ public class InputManager : MonoBehaviour
         }
     }
 
-
+    private void HandleInteractionInput()
+    {
+        if(interactInput)
+        {
+            if(!playerManager.canInteract)
+            {
+                interactInput = false;
+            }
+        }
+    }
 
 
 

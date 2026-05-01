@@ -61,7 +61,12 @@ public class AnimatorManager : MonoBehaviour
         animator.SetFloat("Vertical", snappedVertical, 0.1f, Time.deltaTime);
     }
 
-    private void OnAnimatorMove() //Rollback
+    /// <summary>
+    /// IMPORTANT: Este método debe permanecer activo aunque las animaciones no tengan Root Motion.
+    /// Su presencia modifica el comportamiento interno de Unity respecto a la rotación del Rigidbody.
+    /// Comentarlo provoca jitter y pérdida de control en la rotación del personaje y la cámara.
+    /// </summary> 
+    private void OnAnimatorMove()
     { 
         Vector3 animatorDeltaPosition = animator.deltaPosition;
         animatorDeltaPosition.y = 0;

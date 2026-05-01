@@ -6,14 +6,14 @@ public class PlayerManager : MonoBehaviour
 {
     public PlayerCamera playerCamera;
     
-    InputManager inputManager;
+    public InputManager inputManager;
     Animator animator;
     PlayerLocomotionManager playerLocomotionManager;
 
     [Header("Player Flags")]
     public bool isPerfomingAction;
     public bool isPerformingQuickTurn;
-
+    public bool canInteract;
 
     private void Awake()
     {
