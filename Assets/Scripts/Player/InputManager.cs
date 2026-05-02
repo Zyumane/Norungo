@@ -102,6 +102,10 @@ public class InputManager : MonoBehaviour
                 interactInput = false;
             }
         }
+        else
+        {
+            interactInput = false;
+        }
     }
 
 

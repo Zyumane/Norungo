@@ -41,10 +41,6 @@ public class InteractibleObject : MonoBehaviour
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        if (player == null)
-        {
-            player = other.GetComponent<PlayerManager>();
-        }
         if (player != null)
         {
             interactibleCanvas.SetActive(false);
