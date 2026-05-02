@@ -7,6 +7,8 @@ public class DoorInteractible : InteractibleObject
     [Header("Door propeties")]
     [SerializeField]  Animator doorAnimator;
 
+    private PlayerInventoryManager inventory;
+
     [Header("Lock Details")]
     [SerializeField] bool isLocked;
     [SerializeField] bool requiersKey;
@@ -30,16 +32,88 @@ public class DoorInteractible : InteractibleObject
 
     protected override void Interact(PlayerManager player)
     {
-        base.Interact(player);
+        //base.Interact(player);
 
         if(isLocked)
         {
-            //Send a UI pop up (This door is locked) 
-            //Option 1: if player has key, we auto use the key
-            //Option 2: Open Inventory and make the player manually select the key
+            if(requiersKey)
+            {
+                inventory = player.playerInventoryManager;
 
-            //Option 1 logic: scans the key inside of the inventory list
-            if(requiersKey && isLocked)
+                Item foundKey = FindKey(inventory);
+
+                if(foundKey != null)
+                {
+                    isLocked = false;
+
+                    if(inventory.rightHand == foundKey)
+                    {
+                        inventory.rightHand = null;
+                    }
+                    else if(inventory.leftHand == foundKey)
+                    {
+                        inventory.leftHand = null;
+                    }
+                    else if(inventory.beltSlot1 == foundKey)
+                    {
+                        inventory.beltSlot1 = null;
+                    }
+                    else if(inventory.beltSlot2 == foundKey)
+                    {
+                        inventory.beltSlot2 = null;
+                    }
+                    else if(inventory.beltSlot3  == foundKey)
+                    {
+                        inventory.beltSlot3 = null;
+                    }
+                }
+                else
+                {
+                    Debug.Log("The door requiers key, or it has not been assigned");
+                    return;
+                }
+            }
+            else
+            {
+                Debug.Log("The Door is locked");
+                return;
+            }
+        }
+
+        if (!isLocked)
+        {
+            interactibleCanvas.SetActive(false);
+            doorAnimator.Play("OpenDoor_Anima");
+        }
+    }
+
+    private Item FindKey(PlayerInventoryManager inventory)
+    {
+        if(inventory.rightHand != null && inventory.rightHand.itemID == keyID)
+            return inventory.rightHand;
+        if(inventory.leftHand != null && inventory.leftHand.itemID == keyID)
+            return inventory.leftHand;
+        if(inventory.beltSlot1 != null && inventory.beltSlot1.itemID == keyID)
+            return inventory.beltSlot1;
+        if(inventory.beltSlot2 != null && inventory.beltSlot2.itemID == keyID)
+            return inventory.beltSlot2;
+        if(inventory.beltSlot3 != null && inventory.beltSlot3.itemID == keyID)
+            return inventory.beltSlot3;
+
+        return null;    
+    }
+
+}
+
+/*   Scrapped Code
+ 
+    //Send a UI pop up (This door is locked) 
+    //Option 1: if player has key, we auto use the key
+    //Option 2: Open Inventory and make the player manually select the key
+
+    //Option 1 logic: scans the key inside of the inventory list
+    
+    if(requiersKey && isLocked)
             {
                 foreach (Item item in player.playerInventoryManager.itemsInInventory)
                 {
@@ -50,12 +124,7 @@ public class DoorInteractible : InteractibleObject
                     }
                 }
             }
-        }
-
-        if (!isLocked)
-        {
-            interactibleCanvas.SetActive(false);
-            doorAnimator.Play("OpenDoor_Anima");
-        }
-    }
-}
+ 
+ 
+ 
+ */

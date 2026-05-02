@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventoryManager : MonoBehaviour
 {
     [Header("Belt state")]
     public bool gotBelt = false;
-    public List<Item> itemsInInventory;
 
     [Header("Manos fase 1 y 2")]
     public Item rightHand;
