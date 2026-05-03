@@ -4061,6 +4061,7 @@ GameObject:
   - component: {fileID: 7701597264670225616}
   - component: {fileID: 7701597264670225617}
   - component: {fileID: 7701597264670225618}
+  - component: {fileID: 7701597264670225619}
   m_Layer: 0
   m_Name: Main Player
   m_TagString: Untagged
@@ -5569,6 +5570,7 @@ MonoBehaviour:
   playerCamera: {fileID: 1666013754}
   playerInventoryManager: {fileID: 0}
   inputManager: {fileID: 0}
+  playerSanityManager: {fileID: 0}
   isPerformingAction: 0
   isPerformingQuickTurn: 0
   canInteract: 0
@@ -5681,6 +5683,21 @@ MonoBehaviour:
   beltSlot1: {fileID: 0}
   beltSlot2: {fileID: 0}
   beltSlot3: {fileID: 0}
+--- !u!114 &7701597264670225619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151131426716941046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68330c432c34cd94391330d201c15381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSanity: 100
+  maxSanity: 100
+  sanityDamageRate: 5
 --- !u!1 &7709631005099405935
 GameObject:
   m_ObjectHideFlags: 0

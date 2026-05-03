@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerCamera playerCamera;
     public PlayerInventoryManager playerInventoryManager;
     public InputManager inputManager;
+    public PlayerSanityManager playerSanityManager;
 
     Animator animator;
     PlayerLocomotionManager playerLocomotionManager;
@@ -23,6 +24,7 @@ public class PlayerManager : MonoBehaviour
         inputManager = GetComponent<InputManager>();
         animator = GetComponent<Animator>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+        playerSanityManager = GetComponent<PlayerSanityManager>();
     }
 
     private void Update()
