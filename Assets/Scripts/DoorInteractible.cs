@@ -89,19 +89,41 @@ public class DoorInteractible : InteractibleObject
 
     private Item FindKey(PlayerInventoryManager inventory)
     {
+        KeyItem keyItem;
         if(string.IsNullOrEmpty(keyID))
         {
             if (inventory.rightHand != null && inventory.rightHand.GetType() == typeof(KeyItem))
-                return inventory.rightHand;
-            if (inventory.leftHand != null && inventory.leftHand.GetType() == typeof(KeyItem))
-                return inventory.leftHand;
-            if (inventory.beltSlot1 != null && inventory.beltSlot1.GetType() == typeof(KeyItem))
-                return inventory.beltSlot1;
-            if (inventory.beltSlot2 != null && inventory.beltSlot2.GetType() == typeof(KeyItem))
-                return inventory.beltSlot2;
-            if (inventory.beltSlot3 != null && inventory.beltSlot3.GetType() == typeof(KeyItem))
-                return inventory.beltSlot3;
+            {
+                keyItem = (KeyItem) inventory.rightHand;
+                if(keyItem.isGeneric)
+                    return keyItem;
+            }
+            if(inventory.leftHand != null && inventory.leftHand.GetType() == typeof(KeyItem))
+            {
+                keyItem = (KeyItem) inventory.leftHand;
+                if(keyItem.isGeneric)
+                    return keyItem;
+            }    
+            if(inventory.beltSlot1 != null && inventory.beltSlot1.GetType() == typeof(KeyItem))
+            {
+                keyItem = (KeyItem) inventory.beltSlot1;
+                if(keyItem.isGeneric)
+                    return keyItem;
+            }
+            if(inventory.beltSlot2 != null && inventory.beltSlot2.GetType() == typeof(KeyItem))
+            {
+                keyItem = (KeyItem) inventory.beltSlot2;
+                if(keyItem.isGeneric)
+                    return keyItem;
+            }
+            if(inventory.beltSlot3 != null && inventory.beltSlot3.GetType() == typeof(KeyItem))
+            {
+                keyItem = (KeyItem) inventory.beltSlot3;
+                if(keyItem.isGeneric)
+                    return keyItem;
+            }
             return null;
+
         }
 
         if (inventory.rightHand != null && inventory.rightHand.itemID == keyID)
@@ -151,5 +173,18 @@ public class DoorInteractible : InteractibleObject
             return inventory.beltSlot3;
 
         return null;    
+
+
+        if (inventory.rightHand != null && inventory.rightHand.GetType() == typeof(KeyItem))
+                return inventory.rightHand;
+        if (inventory.leftHand != null && inventory.leftHand.GetType() == typeof(KeyItem))
+            return inventory.leftHand;
+        if (inventory.beltSlot1 != null && inventory.beltSlot1.GetType() == typeof(KeyItem))
+            return inventory.beltSlot1;
+        if (inventory.beltSlot2 != null && inventory.beltSlot2.GetType() == typeof(KeyItem))
+            return inventory.beltSlot2;
+        if (inventory.beltSlot3 != null && inventory.beltSlot3.GetType() == typeof(KeyItem))
+            return inventory.beltSlot3;
+        return null;
  
  */
