@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     PlayerLocomotionManager playerLocomotionManager;
 
     [Header("Player Flags")]
-    public bool isPerfomingAction;
+    public bool isPerformingAction;
     public bool isPerformingQuickTurn;
     public bool canInteract;
 
@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     {
         inputManager.HandleAllInputs();
 
-        isPerfomingAction = animator.GetBool("isPerformingAction");
+        isPerformingAction = animator.GetBool("isPerformingAction");
         isPerformingQuickTurn = animator.GetBool("isPerformingQuickTurn");
     }
 

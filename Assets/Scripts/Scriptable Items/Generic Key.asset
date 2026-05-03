@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ede301f96dad33a449246c290158dd0e, type: 3}
-  m_Name: Test Key
+  m_Name: Generic Key
   m_EditorClassIdentifier: 
-  itemName: Test Key
-  itemPrefabModel: {fileID: 6742710865999467948, guid: a1305d146fd253e4daa203b0034c37b1, type: 3}
-  itemID: Key_01
+  itemName: 
+  itemPrefabModel: {fileID: 0}
+  itemID: 

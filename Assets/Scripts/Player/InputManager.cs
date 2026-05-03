@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleQuickTurnInput()
     {
-        if(playerManager.isPerfomingAction)
+        if(playerManager.isPerformingAction)
         {
             return;
         }
