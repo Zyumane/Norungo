@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerInventoryManager playerInventoryManager;
     public InputManager inputManager;
     public PlayerSanityManager playerSanityManager;
+    public PlayerUIManager playerUI;
 
     Animator animator;
     PlayerLocomotionManager playerLocomotionManager;
@@ -25,6 +26,7 @@ public class PlayerManager : MonoBehaviour
         animator = GetComponent<Animator>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerSanityManager = GetComponent<PlayerSanityManager>();
+        playerUI = FindObjectOfType<PlayerUIManager>();
     }
 
     private void Update()

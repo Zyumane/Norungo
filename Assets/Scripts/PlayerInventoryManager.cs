@@ -52,5 +52,21 @@ public class PlayerInventoryManager : MonoBehaviour
         Debug.Log("Cinturón desbloqueado — 3 slots adicionales disponibles.");
     }
 
+    public void UseItem(Item item, PlayerSanityManager sanityManager)
+    {
+        if (item is HerbItem herb)
+        {
+            herb.Consume(sanityManager);
+            RemoveItem(item);
+        }
+    }
 
+    private void RemoveItem(Item item)
+    {
+        if (rightHand == item) { rightHand = null; return; }
+        if (leftHand == item) { leftHand = null; return; }
+        if (beltSlot1 == item) { beltSlot1 = null; return; }
+        if (beltSlot2 == item) { beltSlot2 = null; return; }
+        if (beltSlot3 == item) { beltSlot3 = null; return; }
+    }
 }

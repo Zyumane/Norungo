@@ -23,6 +23,15 @@ public class InputManager : MonoBehaviour
     public bool runInput;
     public bool quickTurnInput;
     public bool interactInput;
+    public bool sanityHUDToggleInput;
+
+    [Header("Inventory Action Buttons")]
+    public bool useRightHandInput;
+    public bool useLeftHandInput;
+    public bool useBeltSlot1Input;
+    public bool useBeltSlot2Input;
+    public bool useBeltSlot3Input;
+    public Vector2 navigateSlotsInput;
 
 
     private void Awake()
@@ -46,6 +55,14 @@ public class InputManager : MonoBehaviour
             playerControls.Movement.QuickTurn.performed += i => quickTurnInput = true;
             //playerControls.Movement.QuickTurn.canceled += i => quickTurnInput = false;
             playerControls.Player_Actions.Interact.performed += i => interactInput = true;
+            playerControls.Player_Actions.Sanity_HUD_Toggle.performed += i => sanityHUDToggleInput = true;
+            playerControls.Player_Actions.UseRightHand.performed += i => useRightHandInput = true;
+            playerControls.Player_Actions.UseLeftHand.performed += i => useLeftHandInput = true;
+            playerControls.Player_Actions.UseBeltSlot1.performed += i => useBeltSlot1Input = true;
+            playerControls.Player_Actions.UseBeltSlot2.performed += i => useBeltSlot2Input = true;
+            playerControls.Player_Actions.UseBeltSlot3.performed += i => useBeltSlot3Input = true;
+            playerControls.Player_Actions.NavigateSlots.performed += i => navigateSlotsInput = i.ReadValue<Vector2>();
+            playerControls.Player_Actions.NavigateSlots.canceled += i => navigateSlotsInput = Vector2.zero;
         }
 
         playerControls.Enable();
@@ -62,6 +79,8 @@ public class InputManager : MonoBehaviour
         HandleCameraInput();
         HandleQuickTurnInput();
         HandleInteractionInput();
+        HandleSanityHUDToggleInput();
+        HandleUseItemInput();
     }
 
     private void HandleMovementInput()
@@ -108,7 +127,57 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void HandleSanityHUDToggleInput()
+    {
+        if(sanityHUDToggleInput)
+        {
+            sanityHUDToggleInput = false;
+            playerManager.playerUI.ToggleSanityHUD();
+        }
+    }
 
+    private void HandleUseItemInput()
+    {
+        if (useRightHandInput)
+        {
+            useRightHandInput = false;
+            playerManager.playerInventoryManager.UseItem(
+                playerManager.playerInventoryManager.rightHand,
+                playerManager.playerSanityManager);
+        }
+
+        if (useLeftHandInput)
+        {
+            useLeftHandInput = false;
+            playerManager.playerInventoryManager.UseItem(
+                playerManager.playerInventoryManager.leftHand,
+                playerManager.playerSanityManager);
+        }
+
+        if (useBeltSlot1Input)
+        {
+            useBeltSlot1Input = false;
+            playerManager.playerInventoryManager.UseItem(
+                playerManager.playerInventoryManager.beltSlot1,
+                playerManager.playerSanityManager);
+        }
+
+        if (useBeltSlot2Input)
+        {
+            useBeltSlot2Input = false;
+            playerManager.playerInventoryManager.UseItem(
+                playerManager.playerInventoryManager.beltSlot2,
+                playerManager.playerSanityManager);
+        }
+
+        if (useBeltSlot3Input)
+        {
+            useBeltSlot3Input = false;
+            playerManager.playerInventoryManager.UseItem(
+                playerManager.playerInventoryManager.beltSlot3,
+                playerManager.playerSanityManager);
+        }
+    }
 
 
 }
