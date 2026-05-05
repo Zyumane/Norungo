@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,8 @@ public class InputManager : MonoBehaviour
     public bool quickTurnInput;
     public bool interactInput;
     public bool sanityHUDToggleInput;
+    public bool navigateSlotUsed = false;
+    public bool useActiveSlotInput;
 
     [Header("Inventory Action Buttons")]
     public bool useRightHandInput;
@@ -63,6 +66,7 @@ public class InputManager : MonoBehaviour
             playerControls.Player_Actions.UseBeltSlot3.performed += i => useBeltSlot3Input = true;
             playerControls.Player_Actions.NavigateSlots.performed += i => navigateSlotsInput = i.ReadValue<Vector2>();
             playerControls.Player_Actions.NavigateSlots.canceled += i => navigateSlotsInput = Vector2.zero;
+            playerControls.Player_Actions.UseItem.performed += i => useActiveSlotInput = true;
         }
 
         playerControls.Enable();
@@ -81,6 +85,7 @@ public class InputManager : MonoBehaviour
         HandleInteractionInput();
         HandleSanityHUDToggleInput();
         HandleUseItemInput();
+        HandleNavigationSlotInput();
     }
 
     private void HandleMovementInput()
@@ -138,6 +143,7 @@ public class InputManager : MonoBehaviour
 
     private void HandleUseItemInput()
     {
+
         if (useRightHandInput)
         {
             useRightHandInput = false;
@@ -177,7 +183,136 @@ public class InputManager : MonoBehaviour
                 playerManager.playerInventoryManager.beltSlot3,
                 playerManager.playerSanityManager);
         }
+        if (useActiveSlotInput)
+        {
+            useActiveSlotInput = false;
+            playerManager.playerInventoryManager.UseItem(
+                playerManager.playerInventoryManager.GetActiveItem(),
+                playerManager.playerSanityManager);
+        }
+
     }
 
+    private void HandleNavigationSlotInput()
+    {
+        PlayerInventoryManager inventoryA = playerManager.playerInventoryManager;
 
+        if(navigateSlotsInput == Vector2.zero)
+        {
+            navigateSlotUsed = false;
+            return;
+        }
+
+        if (navigateSlotUsed)
+        {
+            return;
+        }
+
+        navigateSlotUsed = true;
+        bool inBelt = inventoryA.activeSlotIndex >= 2;
+
+        if (navigateSlotsInput.y < -0.5f)
+        {
+            if (!inBelt && inventoryA.gotBelt)
+                inventoryA.SetActiveSlot(2);
+        }
+        else if (navigateSlotsInput.y > 0.5f)
+        {
+            if (inBelt)
+            {
+                inventoryA.SetActiveSlot(inventoryA.lastHandIndex);
+            }
+        }
+        else if(navigateSlotsInput.x > 0.5f)
+        {
+            if(!inBelt)
+            {
+                inventoryA.SetActiveSlot(Mathf.Clamp(inventoryA.activeSlotIndex + 1, 0, 1));
+            }
+            else
+            {
+                if(inventoryA.activeSlotIndex == 2)
+                {
+                    inventoryA.SetActiveSlot(4);
+                }
+                else
+                {
+                    inventoryA.SetActiveSlot(inventoryA.activeSlotIndex - 1);
+                }
+            }
+        }
+        else if(navigateSlotsInput.x < -0.5f)
+        {
+            if(!inBelt)
+            {
+                inventoryA.SetActiveSlot(Mathf.Clamp(inventoryA.activeSlotIndex - 1, 0, 1));
+            }
+            else
+            {
+                if(inventoryA.activeSlotIndex == 4)
+                {
+                    inventoryA.SetActiveSlot(2);
+                }
+                else
+                {
+                    inventoryA.SetActiveSlot(inventoryA.activeSlotIndex + 1);
+                }
+            }
+        }
+        playerManager.playerUI.UpdateActiveSlotIndicator(inventoryA.activeSlotIndex);
+    }
 }
+
+/*Scrap code
+        //Belt Tool pouch acces gamepad down
+        if(navigateSlotsInput.y < -0.5f)
+        {
+            if (!inBelt && inventoryA.gotBelt)
+                inventoryA.SetActiveSlot(2);
+            return;
+        }
+    //Jump from belt to hand
+        if (navigateSlotsInput.y > 0.5f)
+        {
+            if (inBelt)
+            {
+                inventoryA.SetActiveSlot(inventoryA.lastHandIndex);
+            }
+            return;
+        }
+
+        //gamepad crosspad right
+        if (navigateSlotsInput.x > 0.5f)
+        {
+            if (!inBelt)
+            {
+                inventoryA.SetActiveSlot(Mathf.Clamp(inventoryA.activeSlotIndex + 1, 0, 1));
+            }
+            else
+            {
+                if (inventoryA.activeSlotIndex == 4)
+                    inventoryA.SetActiveSlot(2);
+                else
+                    inventoryA.SetActiveSlot(inventoryA.activeSlotIndex + 1);
+            }
+            return;
+        }
+
+        //Gamepad crosspad left
+        if (navigateSlotsInput.x < -0.5f)
+        {
+            if (!inBelt)
+            {
+                inventoryA.SetActiveSlot(Mathf.Clamp(inventoryA.activeSlotIndex - 1, 0, 1));
+            }
+            else
+            {
+                if (inventoryA.activeSlotIndex == 2)
+                    inventoryA.SetActiveSlot(4);
+                else
+                    inventoryA.SetActiveSlot(inventoryA.activeSlotIndex - 1);
+            }
+            return;
+        }
+ 
+ */

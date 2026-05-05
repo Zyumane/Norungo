@@ -14,7 +14,21 @@ public class PlayerInventoryManager : MonoBehaviour
     public Item beltSlot2;
     public Item beltSlot3;
 
+    [Header("Slot Navigation")]
+    public int activeSlotIndex = 0;
+    public int lastHandIndex = 0;
+
     public bool BeltAvailable => gotBelt;
+
+    public void SetActiveSlot(int index)
+    {
+        activeSlotIndex = index;
+
+        // Actualiza lastHandIndex solo cuando el slot activo es una mano
+        if (index == 0 || index == 1)
+            lastHandIndex = index;
+        Debug.Log("Slot activo: " + index);
+    }
 
     public bool hasFreeBeltSlot()
     {
@@ -50,6 +64,7 @@ public class PlayerInventoryManager : MonoBehaviour
     {
         gotBelt = true;
         Debug.Log("Cinturón desbloqueado — 3 slots adicionales disponibles.");
+        FindObjectOfType<Inventory_HUD_UI>().PlayUnlockBeltAnimation();
     }
 
     public void UseItem(Item item, PlayerSanityManager sanityManager)
@@ -69,4 +84,19 @@ public class PlayerInventoryManager : MonoBehaviour
         if (beltSlot2 == item) { beltSlot2 = null; return; }
         if (beltSlot3 == item) { beltSlot3 = null; return; }
     }
+
+    public Item GetActiveItem()
+    {
+        switch(activeSlotIndex)
+        {
+            case 0: return rightHand;
+            case 1: return leftHand;
+            case 2: return beltSlot1;
+            case 3: return beltSlot2;
+            case 4: return beltSlot3;
+            default: return null;
+        }
+    }
+
+
 }

@@ -6,12 +6,14 @@ public class PlayerUIManager : MonoBehaviour
 {
     PlayerManager player;
     SanityStatusUI sanityStatusUI;
+    Inventory_HUD_UI inventoryUI;
 
 
     private void Awake()
     {
         player = FindObjectOfType<PlayerManager>();
         sanityStatusUI = FindObjectOfType<SanityStatusUI>();
+        inventoryUI = FindObjectOfType<Inventory_HUD_UI>();
     }
 
     public void DisplaySanityStatus()
@@ -39,5 +41,13 @@ public class PlayerUIManager : MonoBehaviour
     public void ResetSanityToggle()
     {
         sanityStatusUI.SetPersistentMode(false);
+    }
+
+    public void UpdateActiveSlotIndicator(int slotIndex)
+    {
+        if(inventoryUI == null)
+            return;
+
+        inventoryUI.SetActiveSlotIndicator(slotIndex);
     }
 }
