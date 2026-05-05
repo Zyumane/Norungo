@@ -349,6 +349,51 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SelectRightHand",
+                    "type": "Button",
+                    "id": "8b4b3ea0-ff5e-4d5f-8f00-19f6f075d353",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectLeftHand",
+                    "type": "Button",
+                    "id": "386d54c2-b5a7-4e03-8337-68d0326398b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectBeltSlot1",
+                    "type": "Button",
+                    "id": "d177e831-352a-4773-91ea-e87d6c7af6e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectBeltSlot2",
+                    "type": "Button",
+                    "id": "10d8bbbd-715e-4773-87d6-6d97fe27da8f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectBeltSlot3",
+                    "type": "Button",
+                    "id": "5018adf1-16a5-4b3d-b2ed-cfbab7119fdb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -398,17 +443,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3737e352-0f92-424c-9249-4610edb1e35d",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UseItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3263d638-1419-4fa0-b715-ee61cbe73bbd",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
@@ -421,8 +455,8 @@
                 {
                     "name": "",
                     "id": "a6fa7678-5820-473f-82c2-c3fe98b5bfe0",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
+                    "path": "<Keyboard>/g",
+                    "interactions": "MultiTap(tapDelay=0.4)",
                     "processors": "",
                     "groups": "",
                     "action": "UseRightHand",
@@ -432,8 +466,8 @@
                 {
                     "name": "",
                     "id": "a4996b5b-3f72-4e84-953e-6a93cbaa69ff",
-                    "path": "<Keyboard>/g",
-                    "interactions": "",
+                    "path": "<Keyboard>/f",
+                    "interactions": "MultiTap(tapDelay=0.4)",
                     "processors": "",
                     "groups": "",
                     "action": "UseLeftHand",
@@ -444,7 +478,7 @@
                     "name": "",
                     "id": "c0e94e9b-aee1-47e2-8580-c071dd829d1e",
                     "path": "<Keyboard>/z",
-                    "interactions": "",
+                    "interactions": "MultiTap(tapDelay=0.4)",
                     "processors": "",
                     "groups": "",
                     "action": "UseBeltSlot1",
@@ -455,7 +489,7 @@
                     "name": "",
                     "id": "fc383c79-6fc7-4e7a-9a58-14ed3e3bfcb7",
                     "path": "<Keyboard>/x",
-                    "interactions": "",
+                    "interactions": "MultiTap(tapDelay=0.4)",
                     "processors": "",
                     "groups": "",
                     "action": "UseBeltSlot2",
@@ -466,7 +500,7 @@
                     "name": "",
                     "id": "bce11851-acbb-40de-a73d-b50cce37f66d",
                     "path": "<Keyboard>/c",
-                    "interactions": "",
+                    "interactions": "MultiTap(tapDelay=0.4)",
                     "processors": "",
                     "groups": "",
                     "action": "UseBeltSlot3",
@@ -527,6 +561,61 @@
                     "action": "NavigateSlots",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9b7f0b41-2aa1-4ffe-bf2a-e111428af869",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectRightHand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd1cd493-b0a4-4326-a001-53698546021c",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectLeftHand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "94ac1fbb-4014-421d-af9c-8fcc0a797826",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectBeltSlot3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "de5cd209-37e2-48e6-8cf1-a377411d63d0",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectBeltSlot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88773681-68c6-48fb-a248-69c630d32a0a",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectBeltSlot1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

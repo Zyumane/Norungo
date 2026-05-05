@@ -2573,7 +2573,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -30, y: 35}
+  m_AnchoredPosition: {x: -270, y: 35}
   m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &999140637
@@ -2662,7 +2662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -270, y: 35}
+  m_AnchoredPosition: {x: -30, y: 35}
   m_SizeDelta: {x: 105, y: 105}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1077688249
@@ -2942,7 +2942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -20, y: 31.5}
+  m_AnchoredPosition: {x: -205, y: 32}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1110425688
@@ -3761,7 +3761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -205, y: 31.5}
+  m_AnchoredPosition: {x: -15, y: 32}
   m_SizeDelta: {x: 180, y: 180}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1670370861
@@ -7178,6 +7178,11 @@ MonoBehaviour:
   useBeltSlot2Input: 0
   useBeltSlot3Input: 0
   navigateSlotsInput: {x: 0, y: 0}
+  selectRightHandInput: 0
+  selectLeftHandInput: 0
+  selectBeltSlot1Input: 0
+  selectBeltSlot2Input: 0
+  selectBeltSlot3Input: 0
 --- !u!136 &7701597264670225614
 CapsuleCollider:
   m_ObjectHideFlags: 0

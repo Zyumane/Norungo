@@ -371,6 +371,51 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectRightHand"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b4b3ea0-ff5e-4d5f-8f00-19f6f075d353"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectLeftHand"",
+                    ""type"": ""Button"",
+                    ""id"": ""386d54c2-b5a7-4e03-8337-68d0326398b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectBeltSlot1"",
+                    ""type"": ""Button"",
+                    ""id"": ""d177e831-352a-4773-91ea-e87d6c7af6e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectBeltSlot2"",
+                    ""type"": ""Button"",
+                    ""id"": ""10d8bbbd-715e-4773-87d6-6d97fe27da8f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectBeltSlot3"",
+                    ""type"": ""Button"",
+                    ""id"": ""5018adf1-16a5-4b3d-b2ed-cfbab7119fdb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -420,17 +465,6 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3737e352-0f92-424c-9249-4610edb1e35d"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UseItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3263d638-1419-4fa0-b715-ee61cbe73bbd"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
@@ -443,8 +477,8 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a6fa7678-5820-473f-82c2-c3fe98b5bfe0"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": ""MultiTap(tapDelay=0.4)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseRightHand"",
@@ -454,8 +488,8 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a4996b5b-3f72-4e84-953e-6a93cbaa69ff"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": ""MultiTap(tapDelay=0.4)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseLeftHand"",
@@ -466,7 +500,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""c0e94e9b-aee1-47e2-8580-c071dd829d1e"",
                     ""path"": ""<Keyboard>/z"",
-                    ""interactions"": """",
+                    ""interactions"": ""MultiTap(tapDelay=0.4)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseBeltSlot1"",
@@ -477,7 +511,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""fc383c79-6fc7-4e7a-9a58-14ed3e3bfcb7"",
                     ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
+                    ""interactions"": ""MultiTap(tapDelay=0.4)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseBeltSlot2"",
@@ -488,7 +522,7 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""bce11851-acbb-40de-a73d-b50cce37f66d"",
                     ""path"": ""<Keyboard>/c"",
-                    ""interactions"": """",
+                    ""interactions"": ""MultiTap(tapDelay=0.4)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseBeltSlot3"",
@@ -549,6 +583,61 @@ public partial class @MainController: IInputActionCollection2, IDisposable
                     ""action"": ""NavigateSlots"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b7f0b41-2aa1-4ffe-bf2a-e111428af869"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectRightHand"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd1cd493-b0a4-4326-a001-53698546021c"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectLeftHand"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""94ac1fbb-4014-421d-af9c-8fcc0a797826"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectBeltSlot3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de5cd209-37e2-48e6-8cf1-a377411d63d0"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectBeltSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88773681-68c6-48fb-a248-69c630d32a0a"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectBeltSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -572,6 +661,11 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         m_Player_Actions_UseBeltSlot2 = m_Player_Actions.FindAction("UseBeltSlot2", throwIfNotFound: true);
         m_Player_Actions_UseBeltSlot3 = m_Player_Actions.FindAction("UseBeltSlot3", throwIfNotFound: true);
         m_Player_Actions_NavigateSlots = m_Player_Actions.FindAction("NavigateSlots", throwIfNotFound: true);
+        m_Player_Actions_SelectRightHand = m_Player_Actions.FindAction("SelectRightHand", throwIfNotFound: true);
+        m_Player_Actions_SelectLeftHand = m_Player_Actions.FindAction("SelectLeftHand", throwIfNotFound: true);
+        m_Player_Actions_SelectBeltSlot1 = m_Player_Actions.FindAction("SelectBeltSlot1", throwIfNotFound: true);
+        m_Player_Actions_SelectBeltSlot2 = m_Player_Actions.FindAction("SelectBeltSlot2", throwIfNotFound: true);
+        m_Player_Actions_SelectBeltSlot3 = m_Player_Actions.FindAction("SelectBeltSlot3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -712,6 +806,11 @@ public partial class @MainController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Actions_UseBeltSlot2;
     private readonly InputAction m_Player_Actions_UseBeltSlot3;
     private readonly InputAction m_Player_Actions_NavigateSlots;
+    private readonly InputAction m_Player_Actions_SelectRightHand;
+    private readonly InputAction m_Player_Actions_SelectLeftHand;
+    private readonly InputAction m_Player_Actions_SelectBeltSlot1;
+    private readonly InputAction m_Player_Actions_SelectBeltSlot2;
+    private readonly InputAction m_Player_Actions_SelectBeltSlot3;
     public struct Player_ActionsActions
     {
         private @MainController m_Wrapper;
@@ -725,6 +824,11 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         public InputAction @UseBeltSlot2 => m_Wrapper.m_Player_Actions_UseBeltSlot2;
         public InputAction @UseBeltSlot3 => m_Wrapper.m_Player_Actions_UseBeltSlot3;
         public InputAction @NavigateSlots => m_Wrapper.m_Player_Actions_NavigateSlots;
+        public InputAction @SelectRightHand => m_Wrapper.m_Player_Actions_SelectRightHand;
+        public InputAction @SelectLeftHand => m_Wrapper.m_Player_Actions_SelectLeftHand;
+        public InputAction @SelectBeltSlot1 => m_Wrapper.m_Player_Actions_SelectBeltSlot1;
+        public InputAction @SelectBeltSlot2 => m_Wrapper.m_Player_Actions_SelectBeltSlot2;
+        public InputAction @SelectBeltSlot3 => m_Wrapper.m_Player_Actions_SelectBeltSlot3;
         public InputActionMap Get() { return m_Wrapper.m_Player_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -761,6 +865,21 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @NavigateSlots.started += instance.OnNavigateSlots;
             @NavigateSlots.performed += instance.OnNavigateSlots;
             @NavigateSlots.canceled += instance.OnNavigateSlots;
+            @SelectRightHand.started += instance.OnSelectRightHand;
+            @SelectRightHand.performed += instance.OnSelectRightHand;
+            @SelectRightHand.canceled += instance.OnSelectRightHand;
+            @SelectLeftHand.started += instance.OnSelectLeftHand;
+            @SelectLeftHand.performed += instance.OnSelectLeftHand;
+            @SelectLeftHand.canceled += instance.OnSelectLeftHand;
+            @SelectBeltSlot1.started += instance.OnSelectBeltSlot1;
+            @SelectBeltSlot1.performed += instance.OnSelectBeltSlot1;
+            @SelectBeltSlot1.canceled += instance.OnSelectBeltSlot1;
+            @SelectBeltSlot2.started += instance.OnSelectBeltSlot2;
+            @SelectBeltSlot2.performed += instance.OnSelectBeltSlot2;
+            @SelectBeltSlot2.canceled += instance.OnSelectBeltSlot2;
+            @SelectBeltSlot3.started += instance.OnSelectBeltSlot3;
+            @SelectBeltSlot3.performed += instance.OnSelectBeltSlot3;
+            @SelectBeltSlot3.canceled += instance.OnSelectBeltSlot3;
         }
 
         private void UnregisterCallbacks(IPlayer_ActionsActions instance)
@@ -792,6 +911,21 @@ public partial class @MainController: IInputActionCollection2, IDisposable
             @NavigateSlots.started -= instance.OnNavigateSlots;
             @NavigateSlots.performed -= instance.OnNavigateSlots;
             @NavigateSlots.canceled -= instance.OnNavigateSlots;
+            @SelectRightHand.started -= instance.OnSelectRightHand;
+            @SelectRightHand.performed -= instance.OnSelectRightHand;
+            @SelectRightHand.canceled -= instance.OnSelectRightHand;
+            @SelectLeftHand.started -= instance.OnSelectLeftHand;
+            @SelectLeftHand.performed -= instance.OnSelectLeftHand;
+            @SelectLeftHand.canceled -= instance.OnSelectLeftHand;
+            @SelectBeltSlot1.started -= instance.OnSelectBeltSlot1;
+            @SelectBeltSlot1.performed -= instance.OnSelectBeltSlot1;
+            @SelectBeltSlot1.canceled -= instance.OnSelectBeltSlot1;
+            @SelectBeltSlot2.started -= instance.OnSelectBeltSlot2;
+            @SelectBeltSlot2.performed -= instance.OnSelectBeltSlot2;
+            @SelectBeltSlot2.canceled -= instance.OnSelectBeltSlot2;
+            @SelectBeltSlot3.started -= instance.OnSelectBeltSlot3;
+            @SelectBeltSlot3.performed -= instance.OnSelectBeltSlot3;
+            @SelectBeltSlot3.canceled -= instance.OnSelectBeltSlot3;
         }
 
         public void RemoveCallbacks(IPlayer_ActionsActions instance)
@@ -827,5 +961,10 @@ public partial class @MainController: IInputActionCollection2, IDisposable
         void OnUseBeltSlot2(InputAction.CallbackContext context);
         void OnUseBeltSlot3(InputAction.CallbackContext context);
         void OnNavigateSlots(InputAction.CallbackContext context);
+        void OnSelectRightHand(InputAction.CallbackContext context);
+        void OnSelectLeftHand(InputAction.CallbackContext context);
+        void OnSelectBeltSlot1(InputAction.CallbackContext context);
+        void OnSelectBeltSlot2(InputAction.CallbackContext context);
+        void OnSelectBeltSlot3(InputAction.CallbackContext context);
     }
 }
