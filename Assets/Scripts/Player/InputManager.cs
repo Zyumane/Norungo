@@ -273,24 +273,6 @@ public class InputManager : MonoBehaviour
         {
             if(!inBelt)
             {
-                inventoryA.SetActiveSlot(Mathf.Clamp(inventoryA.activeSlotIndex + 1, 0, 1));
-            }
-            else
-            {
-                if(inventoryA.activeSlotIndex == 2)
-                {
-                    inventoryA.SetActiveSlot(4);
-                }
-                else
-                {
-                    inventoryA.SetActiveSlot(inventoryA.activeSlotIndex - 1);
-                }
-            }
-        }
-        else if(navigateSlotsInput.x < -0.5f)
-        {
-            if(!inBelt)
-            {
                 inventoryA.SetActiveSlot(Mathf.Clamp(inventoryA.activeSlotIndex - 1, 0, 1));
             }
             else
@@ -302,6 +284,24 @@ public class InputManager : MonoBehaviour
                 else
                 {
                     inventoryA.SetActiveSlot(inventoryA.activeSlotIndex + 1);
+                }
+            }
+        }
+        else if(navigateSlotsInput.x < -0.5f)
+        {
+            if(!inBelt)
+            {
+                inventoryA.SetActiveSlot(Mathf.Clamp(inventoryA.activeSlotIndex + 1, 0, 1));
+            }
+            else
+            {
+                if(inventoryA.activeSlotIndex == 2)
+                {
+                    inventoryA.SetActiveSlot(4);
+                }
+                else
+                {
+                    inventoryA.SetActiveSlot(inventoryA.activeSlotIndex - 1);
                 }
             }
         }

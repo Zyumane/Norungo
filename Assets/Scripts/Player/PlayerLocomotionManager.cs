@@ -24,6 +24,9 @@ public class PlayerLocomotionManager : MonoBehaviour
     [Header("Movement Variables")]
     private Vector3 moveDirection;
 
+    private bool quickTurnTargetCaptured = false;
+    private Quaternion quickTurnTargetRot;
+
     private void Awake()
     {
         inputManager = GetComponent<InputManager>();
@@ -43,27 +46,47 @@ public class PlayerLocomotionManager : MonoBehaviour
 
     private void HandleRotation()
     {
-        Vector3 targetDir = cameraTransform.forward * inputManager.verticalMovementInput;
-        targetDir += cameraTransform.right * inputManager.horizontalMovementInput;
-        targetDir.Normalize();
-        targetDir.y = 0;
-
-        if (targetDir == Vector3.zero)
-            targetDir = transform.forward;
-
-        Quaternion tr = Quaternion.LookRotation(targetDir);
-        playerRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.fixedDeltaTime);
-        playerRigidbody.MoveRotation(playerRotation);
-
-        //video manual insert code
-        if (inputManager.verticalMovementInput != 0 || inputManager.horizontalMovementInput != 0)
-            transform.rotation = playerRotation;
-
-        if (playerManager.isPerformingQuickTurn) //Rollback
+        // Quick Turn tiene prioridad — rota 180° y sale
+        if (playerManager.isPerformingQuickTurn)
         {
-            targetRotation = transform.rotation * Quaternion.Euler(0, 180f, 0);
-            playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.deltaTime);
+            if (!quickTurnTargetCaptured)
+            {
+                quickTurnTargetRot = transform.rotation * Quaternion.Euler(0, 180f, 0);
+                quickTurnTargetCaptured = true;
+            }
+            playerRotation = Quaternion.Slerp(transform.rotation, quickTurnTargetRot, quickTurnSpeed * Time.deltaTime);
+            playerRigidbody.MoveRotation(playerRotation);
+            return;
         }
+        else
+        {
+            quickTurnTargetCaptured = false;
+        }
+
+        // El personaje sigue el forward de la cámara proyectado en XZ
+        Vector3 cameraForward = cameraTransform.forward;
+        cameraForward.y = 0f;
+        cameraForward.Normalize();
+
+        if (cameraForward == Vector3.zero)
+            cameraForward = transform.forward;
+
+        bool isMoving = inputManager.verticalMovementInput != 0 || inputManager.horizontalMovementInput != 0;
+        
+        float currentRotSpeed;
+
+        if (isMoving)
+        {
+            currentRotSpeed = rotationSpeed;
+        }
+        else
+        {
+            currentRotSpeed = (float)(rotationSpeed * 3f);
+        }
+
+        Quaternion targetRot = Quaternion.LookRotation(cameraForward);
+        playerRotation = Quaternion.Slerp(transform.rotation, targetRot, currentRotSpeed * Time.fixedDeltaTime);
+        playerRigidbody.MoveRotation(playerRotation);
     }
 
     private void HandleMovement()
@@ -83,3 +106,33 @@ public class PlayerLocomotionManager : MonoBehaviour
         playerRigidbody.velocity = projectedVelocity;
     }
 }
+/*Scrap code - Manual RollBack
+    
+        Quaternion targetRot = Quaternion.LookRotation(cameraForward);
+        playerRotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);
+        playerRigidbody.MoveRotation(playerRotation);
+
+        
+       Vector3 targetDir = cameraTransform.forward * inputManager.verticalMovementInput;
+       targetDir += cameraTransform.right * inputManager.horizontalMovementInput;
+       targetDir.Normalize();
+       targetDir.y = 0;
+
+       if (targetDir == Vector3.zero)
+           targetDir = transform.forward;
+
+       Quaternion tr = Quaternion.LookRotation(targetDir);
+       playerRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.fixedDeltaTime);
+       playerRigidbody.MoveRotation(playerRotation);
+
+       //video manual insert code
+       if (inputManager.verticalMovementInput != 0 || inputManager.horizontalMovementInput != 0)
+           transform.rotation = playerRotation;
+
+       if (playerManager.isPerformingQuickTurn) //Rollback
+       {
+           targetRotation = transform.rotation * Quaternion.Euler(0, 180f, 0);
+           playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, quickTurnSpeed * Time.deltaTime);
+       }
+
+ */
