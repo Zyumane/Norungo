@@ -30,6 +30,9 @@ public class ZombieManager : MonoBehaviour
     [Header("Current Target")]
     public PlayerManager currentTarget;
 
+    [Header("States")]
+    public ZombieIdleState zombieIdleState;
+
     private void Awake()
     {
         currentState = startingState;

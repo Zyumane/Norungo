@@ -8,8 +8,8 @@ public class State : MonoBehaviour
    
     public virtual State Tick(ZombieManager zombieManager)
     {
-
         Debug.Log("Running State");
+        
         return this;
     }
 

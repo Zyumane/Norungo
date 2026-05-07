@@ -45,7 +45,7 @@ public class ZombieIdleState : State
         }
     }
     
-    private void FindATargetViaLineOfSight(ZombieManager zombieManager)
+    public void FindATargetViaLineOfSight(ZombieManager zombieManager)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
 
@@ -79,6 +79,35 @@ public class ZombieIdleState : State
                 }
             }
         }
+    }
+
+    public bool IsPlayerInLineOfSight(ZombieManager zombieManager)
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            PlayerManager player = colliders[i].transform.GetComponent<PlayerManager>();
+
+            if (player != null)
+            {
+                Vector3 targetDirection = player.transform.position - transform.position;
+                float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+
+                if (viewableAngle > minimumDetectionRadiusAngle && viewableAngle < maximumDetectionRadiusAngle)
+                {
+                    Vector3 playerStartPoint = new Vector3(player.transform.position.x, characterEyeLevel, player.transform.position.z);
+                    Vector3 zombieStartPoint = new Vector3(transform.position.x, characterEyeLevel, transform.position.z);
+
+                    if (!Physics.Linecast(playerStartPoint, zombieStartPoint, ignoreForLineOfSightDetection))
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
 }

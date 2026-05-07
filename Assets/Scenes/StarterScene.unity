@@ -4004,6 +4004,7 @@ MonoBehaviour:
   distanceFromCurrentTarget: 45
   currentState: {fileID: 2075654805}
   currentTarget: {fileID: 0}
+  zombieIdleState: {fileID: 2075654805}
 --- !u!4 &1644413189
 Transform:
   m_ObjectHideFlags: 0
@@ -5056,6 +5057,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c8842f4e8fef1943b110a7e18ed7951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPhase: 0
+  searchArrivalThreshold: 1.5
 --- !u!1 &2130588964
 GameObject:
   m_ObjectHideFlags: 0
