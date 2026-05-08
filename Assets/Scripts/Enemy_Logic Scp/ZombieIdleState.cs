@@ -76,7 +76,7 @@ public class ZombieIdleState : State
 
             PatrolNode nextNode = GetNextNodeInCycle(zombieManager, startNode);
             currentPath = zombieManager.patrolGraph.RunDijkstra(startNode, nextNode);
-            currentPathIndex = 1;
+            currentPathIndex = 0;
 
             if (currentPath.Count == 0)
                 return;

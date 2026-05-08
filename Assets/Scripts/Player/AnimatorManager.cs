@@ -67,7 +67,9 @@ public class AnimatorManager : MonoBehaviour
     /// Comentarlo provoca jitter y pérdida de control en la rotación del personaje y la cámara.
     /// </summary> 
     private void OnAnimatorMove()
-    { 
+    {
+        if (Time.deltaTime == 0) return;
+
         Vector3 animatorDeltaPosition = animator.deltaPosition;
         animatorDeltaPosition.y = 0;
     

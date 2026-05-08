@@ -18,6 +18,9 @@ public class PlayerManager : MonoBehaviour
     public bool isPerformingQuickTurn;
     public bool canInteract;
 
+    [Header("Game State")]
+    public bool isGameOver = false;
+
     private void Awake()
     {
         //playerCamera = FindObjectOfType<PlayerCamera>();
@@ -31,14 +34,17 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        inputManager.HandleAllInputs();
+        if (isGameOver) return;
 
+        inputManager.HandleAllInputs();
         isPerformingAction = animator.GetBool("isPerformingAction");
         isPerformingQuickTurn = animator.GetBool("isPerformingQuickTurn");
     }
 
     private void FixedUpdate()
     {
+        if (isGameOver) return;
+
         playerLocomotionManager.HandleMovementPublic();
         playerLocomotionManager.HandleRotationPublic();
     }

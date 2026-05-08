@@ -33,11 +33,8 @@ public class EnemyProximityDamage : MonoBehaviour
 
             if (distance <= gameOverRadius)
             {
-                if (damageTimer >= damageInterval)
-                {
-                    Debug.Log("[ESFERA 3] Game Over por proximidad extrema.");
-                    damageTimer = 0f;
-                }
+                if (GameOverManager.Instance != null)
+                    GameOverManager.Instance.TriggerGameOver();
                 return;
             }
 
@@ -81,6 +78,15 @@ public class EnemyProximityDamage : MonoBehaviour
 
 /* Scrapped code
  
+    if (distance <= gameOverRadius)
+            {
+                if (damageTimer >= damageInterval)
+                {
+                    Debug.Log("[ESFERA 3] Game Over por proximidad extrema.");
+                    damageTimer = 0f;
+                }
+                return;
+            }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Player"))
