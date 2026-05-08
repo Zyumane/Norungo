@@ -4,7 +4,193 @@ using UnityEngine;
 
 public class ZombieIdleState : State
 {
-    //We make our character idle until they find a potential target
+    ZombiePursuitState pursuitTargetState;
+
+    [Header("Detection Layer")]
+    [SerializeField] LayerMask detectionLayer;
+
+    [Header("Line Of Sight Detection")]
+    [SerializeField] float characterEyeLevel = 1.8f;
+    [SerializeField] LayerMask ignoreForLineOfSightDetection;
+
+    [Header("Detection Radius")]
+    [SerializeField] float detectionRadius = 5f;
+
+    [Header("Detection Angle Radius")]
+    [SerializeField] float minimumDetectionRadiusAngle = -50f;
+    [SerializeField] float maximumDetectionRadiusAngle = 50f;
+
+    [Header("Patrol")]
+    [SerializeField] private float arrivalThreshold = 1.0f;
+
+    private List<PatrolNode> currentPath = new List<PatrolNode>();
+    private int currentPathIndex = 0;
+
+    private void Awake()
+    {
+        pursuitTargetState = GetComponent<ZombiePursuitState>();
+    }
+
+    public override State Tick(ZombieManager zombieManager)
+    {
+        // Si la fase no es Patrolling, ceder control a ZombiePursuitState
+        if (zombieManager.currentPhase != ZombieManager.RenegatePhase.Patrolling
+            && zombieManager.currentPhase != ZombieManager.RenegatePhase.Chasing)
+            return pursuitTargetState;
+
+        if (zombieManager.currentTarget != null)
+        {
+            zombieManager.currentPhase = ZombieManager.RenegatePhase.Chasing;
+            return pursuitTargetState;
+        }
+
+        FindATargetViaLineOfSight(zombieManager);
+
+        if (zombieManager.currentTarget != null)
+        {
+            zombieManager.currentPhase = ZombieManager.RenegatePhase.Chasing;
+            return pursuitTargetState;
+        }
+
+        HandlePatrol(zombieManager);
+        return this;
+    }
+
+    private void HandlePatrol(ZombieManager zombieManager)
+    {
+        if (zombieManager.currentPhase == ZombieManager.RenegatePhase.Chasing)
+            return;
+
+        zombieManager.currentPhase = ZombieManager.RenegatePhase.Patrolling;
+
+        if (zombieManager.patrolGraph == null)
+            return;
+
+        if (currentPath == null || currentPath.Count == 0)
+        {
+            PatrolNode startNode = zombieManager.patrolGraph.GetNearestNode(
+                zombieManager.transform.position);
+
+            if (startNode == null)
+                return;
+
+            PatrolNode nextNode = GetNextNodeInCycle(zombieManager, startNode);
+            currentPath = zombieManager.patrolGraph.RunDijkstra(startNode, nextNode);
+            currentPathIndex = 1;
+
+            if (currentPath.Count == 0)
+                return;
+        }
+
+        PatrolNode target = currentPath[currentPathIndex];
+        zombieManager.zombieNavmeshAgent.SetDestination(target.transform.position);
+        zombieManager.animator.SetFloat("Vertical", 1, 0.2f, Time.deltaTime);
+
+        bool arrived = !zombieManager.zombieNavmeshAgent.pathPending
+                       && zombieManager.zombieNavmeshAgent.remainingDistance <= arrivalThreshold;
+
+        if (arrived)
+        {
+            currentPathIndex++;
+
+            if (currentPathIndex >= currentPath.Count)
+            {
+                PatrolNode lastNode = currentPath[currentPath.Count - 1];
+                PatrolNode nextNode = GetNextNodeInCycle(zombieManager, lastNode);
+                currentPath = zombieManager.patrolGraph.RunDijkstra(lastNode, nextNode);
+                currentPathIndex = 1;
+            }
+        }
+    }
+
+    private PatrolNode GetNextNodeInCycle(ZombieManager zombieManager, PatrolNode current)
+    {
+        List<PatrolNode> nodes = zombieManager.patrolGraph.patrolNodes;
+        int index = nodes.IndexOf(current);
+        int nextIndex = (index + 1) % nodes.Count;
+        return nodes[nextIndex];
+    }
+
+    public void ResetPatrol()
+    {
+        currentPath = new List<PatrolNode>();
+        currentPathIndex = 0;
+    }
+
+    public void FindATargetViaLineOfSight(ZombieManager zombieManager)
+    {
+        Collider[] colliders = Physics.OverlapSphere(
+            transform.position, detectionRadius, detectionLayer);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            PlayerManager player = colliders[i].transform.GetComponent<PlayerManager>();
+
+            if (player != null)
+            {
+                Vector3 targetDirection = player.transform.position - transform.position;
+                float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+
+                if (viewableAngle > minimumDetectionRadiusAngle &&
+                    viewableAngle < maximumDetectionRadiusAngle)
+                {
+                    RaycastHit hit;
+                    Vector3 playerPoint = new Vector3(
+                        player.transform.position.x, characterEyeLevel,
+                        player.transform.position.z);
+                    Vector3 zombiePoint = new Vector3(
+                        transform.position.x, characterEyeLevel,
+                        transform.position.z);
+
+                    Debug.DrawLine(playerPoint, zombiePoint, Color.yellow);
+
+                    if (!Physics.Linecast(playerPoint, zombiePoint,
+                        out hit, ignoreForLineOfSightDetection))
+                    {
+                        zombieManager.currentTarget = player;
+                    }
+                }
+            }
+        }
+    }
+
+    public bool IsPlayerInLineOfSight(ZombieManager zombieManager)
+    {
+        Collider[] colliders = Physics.OverlapSphere(
+            transform.position, detectionRadius, detectionLayer);
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            PlayerManager player = colliders[i].transform.GetComponent<PlayerManager>();
+
+            if (player != null)
+            {
+                Vector3 targetDirection = player.transform.position - transform.position;
+                float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+
+                if (viewableAngle > minimumDetectionRadiusAngle &&
+                    viewableAngle < maximumDetectionRadiusAngle)
+                {
+                    Vector3 playerPoint = new Vector3(
+                        player.transform.position.x, characterEyeLevel,
+                        player.transform.position.z);
+                    Vector3 zombiePoint = new Vector3(
+                        transform.position.x, characterEyeLevel,
+                        transform.position.z);
+
+                    if (!Physics.Linecast(playerPoint, zombiePoint,
+                        ignoreForLineOfSightDetection))
+                        return true;
+                }
+            }
+        }
+
+        return false;
+    }
+}
+
+/*Major Manual Rollback
+ //We make our character idle until they find a potential target
     //If a target is found we proceed to the "pursuitTarget" state
     //If no target is found we remain in the idle state position
     ZombiePursuitState pursuitTargetState;
@@ -199,7 +385,7 @@ public class ZombieIdleState : State
         }
         return false;
     }
-}
+ */
 
 /*private void FindATargetViaLineOfSight(ZombieManager zombieManager)
    {
