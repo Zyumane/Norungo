@@ -5,6 +5,18 @@ using UnityEngine.AI;
 
 public class ZombieManager : MonoBehaviour
 {
+    public enum RenegatePhase
+    {
+        Patrolling,
+        Chasing,
+        Searching,
+        Returning,
+        Alerted
+    }
+
+    [Header("Current Phase")]
+    public RenegatePhase currentPhase = RenegatePhase.Patrolling;
+
     //The state this state character begings on
     public ZombieIdleState startingState;
 
@@ -32,6 +44,9 @@ public class ZombieManager : MonoBehaviour
 
     [Header("States")]
     public ZombieIdleState zombieIdleState;
+
+    [Header("Patrol")]
+    public PatrolGraph patrolGraph;
 
     private void Awake()
     {
