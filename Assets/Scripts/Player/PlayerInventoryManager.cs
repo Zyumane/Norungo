@@ -69,9 +69,16 @@ public class PlayerInventoryManager : MonoBehaviour
 
     public void UseItem(Item item, PlayerSanityManager sanityManager)
     {
-        if (item is HerbItem herb)
+        if (item == null) return;
+
+        if (item.GetType() == typeof(HerbItem))
         {
+            HerbItem herb = (HerbItem)item;
             herb.Consume(sanityManager);
+            RemoveItem(item);
+        }
+        else if (item.GetType() == typeof(SaveKeyItem))
+        {
             RemoveItem(item);
         }
     }
